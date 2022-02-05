@@ -7,6 +7,7 @@ import fcntl
 
 async def timex(prompt: str, timeout: int):
     timer = 0
+    response = 0
     var = 0
     start = time.time()
     fl = fcntl.fcntl(sys.stdin.fileno(), fcntl.F_GETFL)
@@ -16,10 +17,18 @@ async def timex(prompt: str, timeout: int):
     while timer < timeout:
         try:
             stdin = sys.stdin.read()
-            if "\n" in stdin or "\r" in stdin:
-                break
-        except IOError:
+            response = int(stdin)
+            break
+        except TypeError:
             timer = time.time() - start
             pass
 
     print('complete')
+    print(timer)
+    if timer >= timeout:
+        print('Time is up!')
+        var = 5985
+        return var
+    else:
+        print('input')
+        return response
