@@ -23,12 +23,9 @@ async def timex(prompt: str, timeout: int):
             timer = time.time() - start
             pass
 
-    print('complete')
-    print(timer)
     if timer >= timeout:
         print('Time is up!')
         var = 5985
         return var
     else:
-        print('input')
         return response
